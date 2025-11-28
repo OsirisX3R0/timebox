@@ -1,12 +1,14 @@
 :root {
   --theme-color: #77bbff;
-  --theme-color-faded: hsl(210, 40%, 73%);
+  --theme-color-faded: #9fbad6;
+  --theme-color-darkened: #364d63;
   --light-color: #eee;
   --dark-color: #444;
   --dark-border: #555;
   --background: var(--light-color);
   --foreground: var(--dark-color);
-  --baseline: 1rem;
+  --baseline-measure: 1rem;
+  --baseline-radius: 8px;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   /* line-height: 1.5;
   font-weight: 400;
@@ -25,8 +27,8 @@
 dialog {
   background-color: var(--background);
   border: 1px solid var(--dark-border);
-  border-radius: 8px;
-  padding: var(--baseline);           
+  border-radius: var(--baseline-radius);
+  padding: var(--baseline-measure);           
 }
 
 dialog::backdrop {
@@ -36,8 +38,8 @@ dialog::backdrop {
 button {
   background-color: var(--theme-color);
   border-width: 0;
-  border-radius: 8px;
-  padding: var(--baseline);
+  border-radius: var(--baseline-radius);
+  padding: var(--baseline-measure);
   cursor: pointer;
 }
 
@@ -46,30 +48,64 @@ button:disabled {
   cursor: default;
 }
 
+button.text,
+button.icon {
+  background-color: transparent;
+  color: var(--foreground);
+}
+
 button.rounded {
   border-radius: 50%;
 }
 
 button.mini {
-  padding: .3rem;
+  padding: .45rem;
 }
 
 button.fab {
   position: absolute;
-  right: var(--baseline);
-  bottom: var(--baseline);
+  right: var(--baseline-measure);
+  bottom: var(--baseline-measure);
+}
+
+.timer {
+  background-color: var(--theme-color-darkened);
+  padding: var(--baseline-measure);
+  /* display: grid;
+  grid-template-areas: 
+  "label label label label label close"
+  "duration duration duration duration actions actions"; */
+}
+
+.timer .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  /* grid-area: label; */
+}
+
+.timer .row:not(:last-child) {
+  margin-bottom: var(--baseline-measure);
+}
+
+.timer .duration {
+  font-size: 2rem;
+}
+
+.timer .actions {
+  /* grid-area: actions; */
 }
 
 .new-timer {
   font-size: 2rem;
   color: var(--foreground);
-  margin-bottom: var(--baseline);
+  margin-bottom: var(--baseline-measure);
 }
 
 .enter-timer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--baseline);
+  gap: var(--baseline-measure);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -102,7 +138,7 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: var(--baseline-radius);
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;

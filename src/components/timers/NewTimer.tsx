@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react"
 import db from "../../db"
+import truncateTime from "../../utils/truncateTime"
 
 interface Props {
   close?: () => void
@@ -7,9 +8,6 @@ interface Props {
 
 const NewTimer = ({ close = () => {} }: Props) => {
   const [newTimer, setTimer] = useState('')
-  const [hours, setHours] = useState(0)
-  const [minutes, setMinutes] = useState(0)
-  const [seconds, setSeconds] = useState(0)
 
   const splitTimer = useMemo(() => {
     const fullTimer = newTimer.padStart(6, '0')
@@ -28,10 +26,12 @@ const NewTimer = ({ close = () => {} }: Props) => {
   }, [newTimer])
 
   const label = useMemo(() => {
-    return formattedTimer
-      .split(' ')
+    const segs = formattedTimer.split(' ')
+
+    return truncateTime(segs, seg => seg.includes('00') )
       .map(seg => seg.charAt(0) === '0' ? seg.slice(1) : seg)
       .join(' ')
+      .concat(' Timer')
   }, [newTimer])
 
   const updateTimer = (...vals: string[]) => {

@@ -1,8 +1,8 @@
 import Dexie, { type EntityTable } from "dexie";
-import type { Timer } from "./types";
+import type { ITimer } from "./types";
 
 const db = new Dexie('TimeBox') as Dexie & {
-  timers: EntityTable<Timer, 'id'>
+  timers: EntityTable<ITimer, 'id'>
 }
 
 db.version(1).stores({
