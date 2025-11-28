@@ -1,19 +1,44 @@
 :root {
+  --theme-color: #77bbff;
+  --light-color: #eee;
+  --dark-color: #444;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);*/
+  background-color: var(--light-color);
+  color: var(--dark-color);
 
-  font-synthesis: none;
+  /*font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
 }
 
-a {
+button {
+  background-color: var(--theme-color);
+  border-width: 0;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+button.fab {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+  }
+}
+
+/* a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
@@ -65,4 +90,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
