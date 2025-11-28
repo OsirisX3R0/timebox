@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Timers from './components/Timers'
+import Timers from './components/timers/Timers'
 import { Container } from '@mui/material'
 
 // import reactLogo from './assets/react.svg'
