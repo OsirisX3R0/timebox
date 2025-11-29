@@ -58,7 +58,7 @@ const Timer = ({ timer }: Props) => {
       <div className="row">
         <div className="duration">
           <div>
-            <div>
+            <div className="remaining">
               {time}
               {ifRunning(<button onClick={stop}>↺</button>)}
             </div>

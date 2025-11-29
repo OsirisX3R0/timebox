@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react"
 import truncateTime from "../utils/truncateTime"
 
-const useTime = (duration: number) => {
+const useTime = (
+  duration: number, 
+  allowZero: boolean = false, 
+  excludeHours: boolean = false,
+  secondsPlaces?: number
+) => {
   const [hours, setHours] = useState(0)
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
@@ -16,12 +21,18 @@ const useTime = (duration: number) => {
     setMinutes(minutes)
     setSeconds(seconds)
   }, [duration])
-  
-  return truncateTime([hours, minutes, seconds], seg => seg === 0)
-    .map(seg => `${+seg < 10 ? `0${seg}` : seg}`)
-    .join(':')
 
-  //`${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
+  let values = allowZero 
+    ? [...(excludeHours ? [] : [hours]), minutes, seconds]
+    : truncateTime([...(excludeHours ? [] : [hours]), minutes, seconds], seg => seg === 0)
+  
+  return values
+    .map((seg, i) => {
+      // let segment = seg
+      // if (i === 2 && secondsPlaces) segment = seg.toFixed(secondsPlaces)
+      return `${+seg < 10 ? `0${i === values.length - 1 && secondsPlaces ? seg.toFixed(secondsPlaces) : seg}` : i === values.length - 1 && secondsPlaces ? seg.toFixed(secondsPlaces) : seg}`
+    })
+    .join(':')
 }
 
 export default useTime

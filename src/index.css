@@ -9,6 +9,7 @@
   --foreground: var(--dark-color);
   --baseline-measure: 1rem;
   --baseline-radius: 8px;
+  --footer-height: 75px;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   /* line-height: 1.5;
   font-weight: 400;
@@ -65,23 +66,18 @@ button.mini {
 button.fab {
   position: absolute;
   right: var(--baseline-measure);
-  bottom: var(--baseline-measure);
+  bottom: calc(var(--baseline-measure) + var(--footer-height));
 }
 
 .timer {
   background-color: var(--theme-color-darkened);
   padding: var(--baseline-measure);
-  /* display: grid;
-  grid-template-areas: 
-  "label label label label label close"
-  "duration duration duration duration actions actions"; */
 }
 
 .timer .row {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  /* grid-area: label; */
 }
 
 .timer .row:not(:last-child) {
@@ -92,8 +88,10 @@ button.fab {
   font-size: 2rem;
 }
 
-.timer .actions {
-  /* grid-area: actions; */
+.timer .remaining {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .new-timer {
@@ -108,11 +106,48 @@ button.fab {
   gap: var(--baseline-measure);
 }
 
+ul.laps {
+  display: flex;
+  gap: var(--baseline-measure);
+  list-style-type: none;
+}
+
+ul.laps li {
+  border: 1px solid var(--dark-border);
+  border-radius: var(--baseline-radius);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--dark-color);
     --foreground: var(--light-color);
   }
+}
+
+main {
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+footer {
+  width: 100%;
+  height: var(--footer-height);
+  border-top: 1px solid var(--dark-border);
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer a {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* a {

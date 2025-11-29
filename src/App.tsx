@@ -1,38 +1,31 @@
-import { useState } from 'react'
+import { Activity, useState } from 'react'
 import Timers from './components/timers/Timers'
-import { Container } from '@mui/material'
+import Stopwatch from './components/stopwatch/Stopwatch'
 
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 // import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tabs] = useState(['timers', 'stopwatch'])
+  const [selectedTab, setSelectedTab] = useState('timers')
+
+  const isSelected = (value: string) => selectedTab === value ? 'visible' : 'hidden'
 
   return (
-    <Container>
-      <Timers />
-      {/* <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
-    </Container>
+    <>
+      <main>
+        <Activity mode={isSelected('timers')}>
+          <Timers />
+        </Activity>
+        <Activity mode={isSelected('stopwatch')}>
+          <Stopwatch />
+        </Activity>
+      </main>
+      <footer>
+        {tabs.map(tab => <a onClick={() => setSelectedTab(tab)}>{tab.charAt(0).toUpperCase() + tab.substring(1)}</a>)}
+      </footer>
+    </>
   )
 }
 
