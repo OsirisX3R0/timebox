@@ -31,10 +31,16 @@ const Stopwatch = () => {
 
   return (
     <>
-      <div>{time}</div>
-      <ul className="laps">
-        {laps.map((lap, i) => <li key={i}>{lap.lapTime} {lap.elapsed}</li>)}
-      </ul>
+      <div className="new-timer">{time}</div>
+      <div className="laps">
+        {laps.map((lap, i) => (
+          <div className="lap" key={i}>
+            <div>{i + 1}</div>
+            <div>{lap.lapTime}</div>
+            <div>{lap.elapsed}</div>
+          </div>
+        ))}
+      </div>
       <Activity mode={!active || paused ? 'visible' : 'hidden'}>
         <button onClick={start}>Start ▶︎</button>
       </Activity>

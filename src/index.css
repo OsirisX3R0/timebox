@@ -106,15 +106,20 @@ button.fab {
   gap: var(--baseline-measure);
 }
 
-ul.laps {
+.laps {
+  margin: var(--baseline-measure) 0;
   display: flex;
   gap: var(--baseline-measure);
   list-style-type: none;
 }
 
-ul.laps li {
+.laps .lap {
   border: 1px solid var(--dark-border);
   border-radius: var(--baseline-radius);
+  padding: var(--baseline-measure);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (prefers-color-scheme: dark) {

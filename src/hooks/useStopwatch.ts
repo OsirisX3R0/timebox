@@ -24,7 +24,7 @@ const useStopwatch = (): [string, Lap[], () => void, () => void, () => void, () 
     if (!lastLap)
       setLaps(prevLaps => [...prevLaps, { lapTime: time.toFixed(2), elapsed: time.toFixed(2) }])
     else {
-      setLaps(prevLaps => [...prevLaps, { lapTime: (time - lastLap.lapTime).toFixed(2), elapsed: time.toFixed(2) }])
+      setLaps(prevLaps => [...prevLaps, { lapTime: (time - lastLap.elapsed).toFixed(2), elapsed: time.toFixed(2) }])
     }
   }
 
